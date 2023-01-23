@@ -190,9 +190,6 @@ public final class Notification {
             if (date == null)
                 continue;
             
-            //check or create Notification Channel
-            channelId = options.getChannel();
-            
             Intent intent = new Intent(context, receiver)
                     .setAction(PREF_KEY_ID + request.getIdentifier())
                     .putExtra(Notification.EXTRA_ID, options.getId())
@@ -225,6 +222,9 @@ public final class Notification {
             int notificationId = options.getId();
             PendingIntent pi =
               LaunchUtils.getBroadcastPendingIntent(context, intent, notificationId);
+            
+            //check or create Notification Channel (AssetUtil.parse)
+            channelId = options.getChannel();
 
             try {
                 switch (options.getPrio()) {
