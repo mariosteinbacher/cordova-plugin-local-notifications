@@ -80,9 +80,9 @@ abstract public class AbstractNotificationReceiver extends BroadcastReceiver {
             if (!options.shallWakeUp()) {
                 wakeUp(notification);
             }
-
-            dispatchAppEvent("trigger", notification);
         }
+
+        dispatchAppEvent("trigger", notification);
 
         if (!options.isInfiniteTrigger())
             return;
