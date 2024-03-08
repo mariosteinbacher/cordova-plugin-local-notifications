@@ -432,17 +432,14 @@ public class LocalNotification extends CordovaPlugin {
      */
     private void check(CallbackContext command) {
         boolean allowed = getNotMgr().hasPermission();
-        if(!canSetExactAlarm()){
-//            this.callbackContext = command;
-//            String packageName = this.cordova.getContext().getPackageName();
-//            Intent customIntent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:"+packageName));
-//            cordova.startActivityForResult(this, customIntent, REQUEST_ALARM_PERMISSIONS_CALL);
+        if(!canSetExactAlarm() && allowed){
             JSONObject res = new JSONObject();
             try {
                 res.put("reminder", false);
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
+
             PluginResult result = new PluginResult(PluginResult.Status.OK, res);
             command.sendPluginResult(result);
         } else {
